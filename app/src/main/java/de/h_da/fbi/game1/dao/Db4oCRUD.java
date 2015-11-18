@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Predicate;
 
 import java.util.ArrayList;
 
@@ -23,8 +25,27 @@ import de.h_da.fbi.game1.util.Message;
  * Created by Zhenhao on 18.11.2015.
  */
 public class Db4oCRUD extends Activity {
-    public static void insertIntoAufgabe(FragmentActivity fragmentActivity, CharSequence Gleichung, Integer AnzahlVersuche, Integer Richtig, Integer Fehlversuche, Integer Loesung, Integer PersonID) {
 
+    public static void insertIntoAufgabe(FragmentActivity fragmentActivity, String Gleichung, Integer AnzahlVersuche, Integer Richtig, Integer Fehlversuche, Integer Loesung, final Integer PersonID) {
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
+        Task u = new Task(Gleichung, AnzahlVersuche, Richtig, Fehlversuche, Loesung);
+
+        System.out.println("Stored: " + u);
+        ObjectSet<User> os = db.query(
+                new Predicate<User>(){
+                    public boolean match (User u){
+                        return u.userID == PersonID;
+                    }
+                });
+        User z = null;
+        for (User b : os){
+            z = b;
+            z.Assign(u);
+        }
+        //unidirectional from user to task
+        db.store(z);
+        db.close();
     }
 
     public void insertIntoPerson(FragmentActivity fragmentActivity, String user) {
@@ -35,8 +56,38 @@ public class Db4oCRUD extends Activity {
         db.close();
     }
 
-    public static boolean selectFromPerson(FragmentActivity fragmentActivity, String user) {
-        boolean sqlSuccess = false;
+    public boolean selectFromPerson(FragmentActivity fragmentActivity, final String user) {
+        boolean db4oSuccess = false;
+
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
+        ObjectSet<User> os = db.query(
+                new Predicate<User>(){
+                    public boolean match (User u){
+                        System.out.println("User: " + u.username);
+                        return u.username.equals(user);
+                    }
+                });
+        User z = null;
+        for (User b : os){
+            z = b;
+        }
+        db.close();
+        System.out.println("Username: " + z.username);
+        if (user != null) {
+            MainActivity.loggedUser = z.username;
+            MainActivity.loggedUserID = z.userID;
+            db4oSuccess = true;
+        } else {
+            db4oSuccess = false;
+        }
+
+        return db4oSuccess;
+
+
+
+        /*
+
         SQLiteDatabase db = null;
         try {
             db = fragmentActivity.openOrCreateDatabase(SQLString.DATABASE_NAME, android.content.Context.MODE_PRIVATE, null);
@@ -64,7 +115,7 @@ public class Db4oCRUD extends Activity {
         } finally {
             db.close();
         }
-        return sqlSuccess;
+        */
     }
 
     public static void selectFromAufgabe(FragmentActivity fragmentActivity, ArrayList<Task> arrayOfAufgaben) {

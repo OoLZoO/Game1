@@ -113,7 +113,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             EditText username = (EditText) getView().findViewById(R.id.EditTextNameLogin);
             String user = username.getText().toString();
-            if (DatabaseCRUD.selectFromPerson(getActivity(), user)) {
+            if (new Db4oCRUD().selectFromPerson(getActivity(), user)) {
                 loginSuccess();
             }
         }
