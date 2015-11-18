@@ -11,10 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+
 import de.h_da.fbi.game1.MainActivity;
 import de.h_da.fbi.game1.R;
 import de.h_da.fbi.game1.dao.DatabaseCRUD;
 import de.h_da.fbi.game1.dao.Db4oCRUD;
+import de.h_da.fbi.game1.model.User;
 import de.h_da.fbi.game1.util.Message;
 
 /**
@@ -97,10 +101,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     View.OnClickListener register = new View.OnClickListener() {
         public void onClick(View v) {
+
             EditText username = (EditText) getView().findViewById(R.id.EditTextNameReg);
             String user = username.getText().toString();
             //DatabaseCRUD.insertIntoPerson(getActivity(), user);
-            Db4oCRUD.insertIntoPerson(getActivity(), user);
+            new Db4oCRUD().insertIntoPerson(getActivity(), user);
         }
     };
 

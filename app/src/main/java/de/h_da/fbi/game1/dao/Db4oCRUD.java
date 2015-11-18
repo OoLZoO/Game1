@@ -1,5 +1,6 @@
 package de.h_da.fbi.game1.dao;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
@@ -21,14 +22,14 @@ import de.h_da.fbi.game1.util.Message;
 /**
  * Created by Zhenhao on 18.11.2015.
  */
-public class Db4oCRUD {
+public class Db4oCRUD extends Activity {
     public static void insertIntoAufgabe(FragmentActivity fragmentActivity, CharSequence Gleichung, Integer AnzahlVersuche, Integer Richtig, Integer Fehlversuche, Integer Loesung, Integer PersonID) {
 
     }
 
-    public static void insertIntoPerson(FragmentActivity fragmentActivity, String user) {
+    public void insertIntoPerson(FragmentActivity fragmentActivity, String user) {
         User u = new User (user);
-        ObjectContainer db = Db4oEmbedded.openFile("mdb.db");
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
         db.store (u);
         System.out.println ("Stored: "+ u);
         db.close();
