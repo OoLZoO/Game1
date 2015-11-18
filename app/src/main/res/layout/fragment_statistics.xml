@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.mz_host.mobiledatenbanken.mobiledatenbanken.MyFragment2">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Statistiken"
+        android:id="@+id/textViewStatistiken"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Total Richtig:"
+        android:id="@+id/textViewTotalRichtigText"
+        android:layout_below="@+id/textViewStatistiken"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewTotalRichtig"
+        android:layout_alignTop="@+id/textViewTotalRichtigText"
+        android:layout_toEndOf="@+id/textViewErstversuch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Total Aufgaben:"
+        android:id="@+id/textViewTotalAufgabenText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/textViewTotalRichtig"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewTotalAufgaben"
+        android:layout_below="@+id/textViewTotalRichtig"
+        android:layout_toEndOf="@+id/textViewTotalAufgabenText"
+        android:layout_marginStart="7dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Erstversuch:"
+        android:id="@+id/textViewErstversuchText"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewTotalAufgaben"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewErstversuch"
+        android:layout_below="@+id/textViewTotalAufgabenText"
+        android:layout_toEndOf="@+id/textViewTotalRichtigText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Falsche Lösungen:"
+        android:id="@+id/textViewFalscheLoesungText"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewErstversuch"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewFalscheLoesungen"
+        android:layout_above="@+id/textView"
+        android:layout_toEndOf="@+id/textViewFalscheLoesungText"
+        android:layout_marginStart="9dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Sie können die Statistiken durch löschen der Datenbank (unter Einstellungen) zurücksetzen."
+        android:id="@+id/textView"
+        android:layout_below="@+id/textViewFalscheLoesungText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="68dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewStatInfoText"
+        android:layout_below="@+id/textViewStatistiken"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

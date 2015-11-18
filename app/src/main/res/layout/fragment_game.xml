@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.mz_host.mobiledatenbanken.mobiledatenbanken.HomeFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Home"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/headline" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Lösung:"
+        android:id="@+id/textViewLoesungText"
+        android:layout_marginTop="158dp"
+        android:layout_below="@+id/textViewGleichungText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textViewLoesung"
+        android:layout_alignTop="@+id/textViewLoesungText"
+        android:layout_toEndOf="@+id/textViewLoesungText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Gleichung:"
+        android:id="@+id/textViewGleichungText"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignBaseline="@+id/textViewGleichung"
+        android:layout_alignBottom="@+id/textViewGleichung"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textViewGleichung"
+        android:layout_marginTop="71dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textViewGleichungText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Eingabe:"
+        android:id="@+id/textViewEingabe"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/textViewGleichungText"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="5"
+        android:id="@+id/editTextSolution"
+        android:layout_alignTop="@+id/button"
+        android:layout_toEndOf="@+id/textViewEingabe" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter"
+        android:id="@+id/button"
+        android:layout_alignBaseline="@+id/textViewEingabe"
+        android:layout_alignBottom="@+id/textViewEingabe"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewLoginStatus"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Überspringen"
+        android:id="@+id/buttonUeberspringen"
+        android:layout_below="@+id/button"
+        android:layout_alignEnd="@+id/button" />
+
+</RelativeLayout>

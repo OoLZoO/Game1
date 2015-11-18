@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mobile Datenbanken</string>
+    <string name="action_settings">Settings</string>
+    <string name="opendrawer">Open</string>
+    <string name="closedrawer">Close</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="deHome">Home</string>
+    <string name="deFragment1">Verlauf</string>
+    <string name="deFragment2">Statistiken</string>
+    <string name="deFragment3">Einstellungen</string>
+    <string name="deFragment4">About</string>
+    <string name="deFragment5">Fragment5</string>
+</resources>
