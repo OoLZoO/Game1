@@ -18,6 +18,7 @@ import de.h_da.fbi.game1.MainActivity;
 import de.h_da.fbi.game1.R;
 import de.h_da.fbi.game1.adapter.TaskAdapter;
 import de.h_da.fbi.game1.dao.DatabaseCRUD;
+import de.h_da.fbi.game1.dao.Db4oCRUD;
 import de.h_da.fbi.game1.model.Task;
 
 /**
@@ -29,7 +30,8 @@ public class HistoryFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
         if (!(MainActivity.loggedUser.equals("Unknown"))) {
             ArrayList<Task> arrayOfAufgaben = new ArrayList<>();
-            DatabaseCRUD.selectFromAufgabe(getActivity(), arrayOfAufgaben);
+            Db4oCRUD.selectFromAufgabe(getActivity(), arrayOfAufgaben);
+            System.out.println(arrayOfAufgaben.size());
             ListAdapter adapter = new TaskAdapter(getActivity(), arrayOfAufgaben);
             setListAdapter(adapter);
         }

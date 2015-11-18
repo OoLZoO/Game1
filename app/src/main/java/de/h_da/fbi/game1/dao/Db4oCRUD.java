@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Predicate;
 
 import java.util.ArrayList;
@@ -26,16 +27,21 @@ import de.h_da.fbi.game1.util.Message;
  */
 public class Db4oCRUD extends Activity {
 
-    public static void insertIntoAufgabe(FragmentActivity fragmentActivity, String Gleichung, Integer AnzahlVersuche, Integer Richtig, Integer Fehlversuche, Integer Loesung, final Integer PersonID) {
+    public void insertIntoAufgabe(FragmentActivity fragmentActivity, String Gleichung, Integer AnzahlVersuche, Integer Richtig, Integer Fehlversuche, Integer Loesung, final Integer PersonID) {
 
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
+
+        EmbeddedConfiguration myConf = Db4oEmbedded.newConfiguration();
+        myConf.common().objectClass(User.class).cascadeOnUpdate(true);
+        myConf.common().objectClass(Task.class).cascadeOnUpdate(true);
+        ObjectContainer db = Db4oEmbedded.openFile(myConf, "/data/data/" + fragmentActivity.getPackageName() + "/database");
+
         Task u = new Task(Gleichung, AnzahlVersuche, Richtig, Fehlversuche, Loesung);
 
         System.out.println("Stored: " + u);
         ObjectSet<User> os = db.query(
                 new Predicate<User>(){
                     public boolean match (User u){
-                        return u.userID == PersonID;
+                        return u.username.equals(MainActivity.loggedUser);
                     }
                 });
         User z = null;
@@ -43,6 +49,7 @@ public class Db4oCRUD extends Activity {
             z = b;
             z.Assign(u);
         }
+
         //unidirectional from user to task
         db.store(z);
         db.close();
@@ -51,7 +58,7 @@ public class Db4oCRUD extends Activity {
     public void insertIntoPerson(FragmentActivity fragmentActivity, String user) {
         User u = new User (user);
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
-        db.store (u);
+        db.store(u);
         System.out.println ("Stored: "+ u);
         db.close();
     }
@@ -86,39 +93,33 @@ public class Db4oCRUD extends Activity {
 
 
 
-        /*
-
-        SQLiteDatabase db = null;
-        try {
-            db = fragmentActivity.openOrCreateDatabase(SQLString.DATABASE_NAME, android.content.Context.MODE_PRIVATE, null);
-            db.execSQL(SQLString.CREATE_TABLE_PERSON);
-
-            // Check if exists
-            Cursor c = db.rawQuery(SQLString.SELECT_NAME_FROM_PERSON(user), null);
-            if (c.moveToFirst()) {
-                do {
-                    MainActivity.loggedUser = c.getString(0);
-                    sqlSuccess = true;
-                    // get ID
-                    Cursor d = db.rawQuery("SELECT _id FROM Person WHERE Name = '" + user + "' ", null);
-                    d.moveToFirst();
-                    MainActivity.loggedUserID = d.getInt(0);
-                    d.close();
-
-                } while (c.moveToNext());
-            } else {
-                Message.message(fragmentActivity, "User does not exists");
-            }
-            c.close();
-        } catch (Exception e) {
-            Message.message(fragmentActivity, "Error: " + e.getMessage());
-        } finally {
-            db.close();
-        }
-        */
     }
 
     public static void selectFromAufgabe(FragmentActivity fragmentActivity, ArrayList<Task> arrayOfAufgaben) {
+
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/data/data/" + fragmentActivity.getPackageName() + "/database");
+        ObjectSet<User> os = db.query(
+                new Predicate<User>(){
+                    public boolean match (User u){
+                        System.out.println("User: " + u.username);
+                        return u.username.equals(MainActivity.loggedUser);
+                    }
+                });
+        User z = null;
+        for (User b : os){
+            z = b;
+        }
+        db.close();
+        System.out.println("SIZE: " + z.aufgabenListe.size());
+        for (int i=0; i<z.aufgabenListe.size(); i++){
+            arrayOfAufgaben.add(z.aufgabenListe.get(i));
+        }
+
+
+
+
+/*
         SQLiteDatabase db2 = null;
         try {
             db2 = fragmentActivity.openOrCreateDatabase(SQLString.DATABASE_NAME, android.content.Context.MODE_PRIVATE, null);
@@ -142,7 +143,7 @@ public class Db4oCRUD extends Activity {
             Message.message(fragmentActivity, "Error: " + e.getMessage());
         } finally {
             db2.close();
-        }
+        }*/
     }
 
     public static void deleteFromAufgaben(FragmentActivity fragmentActivity) {

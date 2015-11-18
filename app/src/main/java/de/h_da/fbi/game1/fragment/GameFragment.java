@@ -17,6 +17,7 @@ import java.util.Random;
 import de.h_da.fbi.game1.MainActivity;
 import de.h_da.fbi.game1.R;
 import de.h_da.fbi.game1.dao.DatabaseCRUD;
+import de.h_da.fbi.game1.dao.Db4oCRUD;
 import de.h_da.fbi.game1.util.Message;
 
 
@@ -73,7 +74,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                     Message.message(getActivity(), "Richtige Lösung!");
                     tryCount++;
                     if (!(MainActivity.loggedUser.equals("Unknown"))) {
-                        DatabaseCRUD.insertIntoAufgabe(getActivity(), gleichungTextView.getText(), tryCount, 1, failCount, result.intValue(), MainActivity.loggedUserID);
+                        new Db4oCRUD().insertIntoAufgabe(getActivity(), gleichungTextView.getText().toString(), tryCount, 1, failCount, result.intValue(), MainActivity.loggedUserID);
                         tryCount = 0;
                         failCount = 0;
                     }
