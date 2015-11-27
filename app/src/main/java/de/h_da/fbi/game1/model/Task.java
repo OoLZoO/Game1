@@ -11,10 +11,10 @@ public class Task {
     public Integer solution;
 
     public Task(String Name, Integer Score, Integer SkippedEx, Integer WrongEx, Integer Solution) {
-        this.Name = Name;
-        this.Score = Score;
-        this.SkippedEx = SkippedEx;
-        this.WrongEx = WrongEx;
-        this.solution = Solution;
+        this.Name = Name; // Gleichung
+        this.Score = Score; // AnzahlVersuche
+        this.SkippedEx = SkippedEx; // Richtig
+        this.WrongEx = WrongEx; // Fehlversuche
+        this.solution = Solution; // Lösung
     }
 }

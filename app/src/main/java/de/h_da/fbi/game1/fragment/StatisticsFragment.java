@@ -13,6 +13,7 @@ import android.widget.TextView;
 import de.h_da.fbi.game1.MainActivity;
 import de.h_da.fbi.game1.R;
 import de.h_da.fbi.game1.dao.DatabaseCRUD;
+import de.h_da.fbi.game1.dao.Db4oCRUD;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +45,7 @@ public class StatisticsFragment extends Fragment {
         }
         if (!(MainActivity.loggedUser.equals("Unknown"))) {
             TextView TV1 = (TextView) getView().findViewById(R.id.textViewTotalAufgaben);
-            DatabaseCRUD.retrieveStatistics(getActivity(), TV1, getView());
+            Db4oCRUD.retrieveStatistics(getActivity(), TV1, getView());
         }
     }
 
