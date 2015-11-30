@@ -55,8 +55,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             if (!(MainActivity.loggedUser.equals("Unknown"))) {
                 TextView gleichungTextView = (TextView) getView().findViewById(R.id.textViewGleichung);
-                DatabaseCRUD.insertIntoAufgabe(
-                        getActivity(), gleichungTextView.getText(), tryCount, 0, failCount, result.intValue(), MainActivity.loggedUserID);
+                //DatabaseCRUD.insertIntoAufgabe(
+                       // getActivity(), gleichungTextView.getText(), tryCount, 0, failCount, result.intValue(), MainActivity.loggedUserID);
+                new Db4oCRUD().insertIntoAufgabe(getActivity(), gleichungTextView.getText().toString(), tryCount, 0, failCount, result.intValue(), MainActivity.loggedUserID);
                 tryCount = 0;
                 failCount = 0;
             }
